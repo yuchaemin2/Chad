@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_PATH" value="./logs"/>
+
+    <!-- Appenders -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] %logger %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- TRACE > DEBUG > INFO > WARN > ERROR > OFF -->
+    <!-- Root Logger -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
+
+<!--<logger name="cohttp://m.springboot.api.controller" level="DEBUG" additivity="false">-->
+<!--<appender-ref ref="console"/>-->
+<!--<appender-ref ref="INFO_LOG"/>-->
+<!--</logger>-->
+
+        @RequestMapping(value = "/hello", method = RequestMethod.GET)
+        public String getHello() {
+        // 로그 출력
+        LOGGER.info("getHello 메소드가 호출되었습니다.");
+        return "Hello World";
+        }
+
+        @GetMapping(value = "/name")
+        public String getName() {
+        // 로그 출력
+        LOGGER.info("getName 메소드가 호출되었습니다.");
+        return "Flature";
+        }
+
+        @GetMapping(value = "/variable1/{variable}")
+        public String getVariable1(@PathVariable String variable) {
+        // 컨트롤러에 들어오는 값을 포함하여 로그 출력
+        LOGGER.info("@PathVariable을 통해 들어온 값 : {}", variable);
+        return variable;
+        }
